@@ -1,5 +1,7 @@
 # Merge Sort: Divide the array in two halves, sort the two halves and merge them
 def merge_sort(arr):
+    # TODO: Count the number of steps
+    steps = 0
     if len(arr) > 1:
         mid = len(arr) // 2
         L = arr[:mid]
@@ -23,4 +25,4 @@ def merge_sort(arr):
             arr[k] = R[j]
             j += 1
             k += 1
-    return arr
+    return arr, steps
