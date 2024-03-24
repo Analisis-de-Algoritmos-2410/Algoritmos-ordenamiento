@@ -4,65 +4,46 @@ from algoritmos.insertion_sort import insertion_sort
 from algoritmos.merge_sort import merge_sort
 from algoritmos.quick_sort import quick_sort
 
-from matplotlib import pyplot as plt
+from utils import time_function, plot_dict, print_polynomial
+from numpy.polynomial.polynomial import Polynomial
 import random
-import pandas as pd
-import time
+
+# TODO: Uncomment quick_sort when steps are implemented
 
 solutionsFunctions = {
     'Bubble Sort': bubble_sort,
     'Selection Sort': selection_sort,
     'Insertion Sort': insertion_sort,
     'Merge Sort': merge_sort,
-    'Quick Sort': quick_sort
+    # 'Quick Sort': quick_sort
 }
 
-# Function to time the execution of a function
-def time_function(func, arr):
-    start = time.perf_counter()
-    func(arr)
-    final = time.perf_counter()
-    return final-start
-
 def main():
-    # Time for each algorithm
-    time = {
-        'Bubble Sort': [],
-        'Selection Sort': [],
-        'Insertion Sort': [],
-        'Merge Sort': [],
-        'Quick Sort': []
-    }
-
-    # Steps for each algorithm
-    steps = {
-        'Bubble Sort': [],
-        'Selection Sort': [],
-        'Insertion Sort': [],
-        'Merge Sort': [],
-        'Quick Sort': []
+    results = {
+        'times' : {key: [] for key in solutionsFunctions},
+        'steps' : {key: [] for key in solutionsFunctions},
+        'coefs' : {key: [] for key in solutionsFunctions}
     }
 
     # Generate random arrays of different sizes
-    for n in range(10, 10000, 100):
+    tams = range(10, 1000, 10)
+    for n in tams:
         arr = [random.randrange(-100, 100) for _ in range(n+1)]
         for key in solutionsFunctions:
-            time[key].append(time_function(solutionsFunctions[key], arr))
+            time, steps = time_function(solutionsFunctions[key], arr)
+            results['times'][key].append(time)
+            results['steps'][key].append(steps)
 
-    # Create a DataFrame and plot the results
-    df = pd.DataFrame(time)
-    df.index.name = 'n'
-    df.reset_index(inplace=True)
+    # Create a DataFrame and plot the results for time
+    plot_dict(results['times'], 'Execution times', 'n', 'Time (s)')
+    # Create a DataFrame and plot the results for steps
+    plot_dict(results['steps'], 'Steps', 'n', 'Steps')
 
+    # Calculate the coefficients of the time complexity
+    print('-'*50, 'Time complexity coefficients', '-'*50, sep='\n')
     for key in solutionsFunctions:
-        plt.plot(df['n'], df[key], label=key)
-    
-    plt.legend()
-    plt.xlabel('n')
-    plt.ylabel('Time (s)')
-    plt.title('Execution times')
-    plt.show()
-
+        results['coefs'][key] = Polynomial.fit(tams, results['steps'][key], 2).convert().coef
+        print(key, ':     \t T(n) = ', print_polynomial(results['coefs'][key]), sep='')
 
 
 if __name__ == '__main__':
