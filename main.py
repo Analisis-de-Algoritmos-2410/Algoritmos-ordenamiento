@@ -8,14 +8,12 @@ from utils import time_function, plot_dict, print_polynomial
 from numpy.polynomial.polynomial import Polynomial
 import random
 
-# TODO: Uncomment quick_sort when steps are implemented
-
 solutionsFunctions = {
     'Bubble Sort': bubble_sort,
     'Selection Sort': selection_sort,
     'Insertion Sort': insertion_sort,
     'Merge Sort': merge_sort,
-    # 'Quick Sort': quick_sort
+    'Quick Sort': quick_sort
 }
 
 def main():
