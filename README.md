@@ -1,5 +1,8 @@
 # Analisis de complejidad de algoritmos de ordenamiento
 
+> ![WARNING]
+> Al ejecutar el archivo main.py se van a generar 6 gráficas, las cuales corresponden a los pares de gráficas para el tiempo de ejecución y pasos del algoritmo en el mejor, peor y caso promedio.
+
 ## Merge sort
 
 Este algoritmo sigue una técnica de Divide & Conquer.
@@ -68,3 +71,9 @@ QuickSort no tiene asegurado que sea $O(n\log n)$, puede ser $O(n^2)$ en los peo
 Sin embargo, hay que tener en cuenta que si todos los elementos son iguales, entonces el algoritmo daría un tiempo de $O(n^2)$. Para evitar esto, lo que se puede hacer es hacer una partición de más, o una region de mas $= x$ donde se almacenen todos los elementos iguales al pivot.
 
 Para poder seguir con el algoritmo, debemos almacenar los indices que indican los boundaries de las regiones para que se pueda referenciar en las demás llamadas recursivas.
+
+## Analisis de las graficas generadas
+
+Si bien las gráficas modelan el tiempo de ejecución y los pasos hechos por los algoritmos en cada caso, es valioso mencionar que no se diferencian mucho, esto puede ser debido a que en el caso del **merge sort** el que sea un algoritmo de D&C indica que siempre va a hacer la misma cantidad de pasos dependiendo de la entrada $\Theta(n\log n)$, por otro lado con el **quick sort** se mencionó que podía llegar a tomar $O(n^2)$ si se escoge un pibot muy malo o todos los elementos del array son iguales, sin embargo, en la implementación hecha se toma en cuenta la tercera partición mencionada para eliminar el caso de $O(n^2)$ por elementos repetidos.
+
+El hecho de que **quick sort** pueda tomar $O(n^2)$ por un mal pibot puede darse por probabilidades, pero este no significa un impacto relevante cuando se ejecuta el algoritmo muchas veces.
