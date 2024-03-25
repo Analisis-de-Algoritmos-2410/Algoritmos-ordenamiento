@@ -1,6 +1,6 @@
 # Analisis de complejidad de algoritmos de ordenamiento
 
-> ![WARNING]
+> [!WARNING]
 > Al ejecutar el archivo main.py se van a generar 6 gráficas, las cuales corresponden a los pares de gráficas para el tiempo de ejecución y pasos del algoritmo en el mejor, peor y caso promedio.
 
 ## Merge sort
