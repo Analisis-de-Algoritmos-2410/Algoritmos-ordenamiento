@@ -7,7 +7,7 @@ def merge_sort(arr):
         R = arr[mid:]
         _, steps_l = merge_sort(L)
         _, steps_r = merge_sort(R)
-        steps += steps_l + steps_r + 5 # 5 steps for the merge
+        steps += steps_l + steps_r + 5  # 5 steps for the merge
 
         # Merge
         i = j = k = 0
@@ -19,16 +19,16 @@ def merge_sort(arr):
                 arr[k] = R[j]
                 j += 1
             k += 1
-            steps += 4 # 4 steps for the comparison and the assignment
+            steps += 4  # 4 steps for the comparison and the assignment
         while i < len(L):
             arr[k] = L[i]
             i += 1
             k += 1
-            steps += 3 # 3 steps for the assignment
+            steps += 3  # 3 steps for the assignment
         while j < len(R):
             arr[k] = R[j]
             j += 1
             k += 1
-            steps += 3 # 3 steps for the assignment
+            steps += 3  # 3 steps for the assignment
 
     return arr, steps
